@@ -30,7 +30,7 @@ Grupo (vagas disponíveis), Membros ativos.
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-002
@@ -40,7 +40,7 @@ O número de vagas é definido pelo Administrador no momento do cadastro da assi
 
 ---
 
-## RN-002 — Cálculo do Rateio
+## RN-002 — Cálculo da Divisão
 
 **Título:**
 Divisão automática do valor da assinatura.
@@ -61,7 +61,7 @@ Recalculada sempre que houver alteração no número de membros ativos ou no val
 `valor_individual = valor_total / número_de_membros_ativos`.
 
 **Exceções:**
-Nenhuma exceção (rateio proporcional/diferenciado) identificada na especificação atual.
+Nenhuma exceção (divisão proporcional/diferenciado) identificada na especificação atual.
 
 **Dados envolvidos:**
 Assinatura (valor total), Grupo (membros ativos).
@@ -70,7 +70,7 @@ Assinatura (valor total), Grupo (membros ativos).
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-003
@@ -98,7 +98,7 @@ Administrador do Grupo, Membro do Grupo.
 Aplicada após o envio de um comprovante de pagamento por um membro.
 
 **Regra:**
-O status da transação só pode ser alterado para "em dia" mediante ação explícita de validação do Administrador; não há confirmação automática.
+O status da transação só pode ser alterado para "em dia" com a validação do Administrador; não há confirmação automática.
 
 **Exceções:**
 Nenhuma identificada.
@@ -110,7 +110,7 @@ Transação (comprovante, status), Membro.
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-005
@@ -150,7 +150,7 @@ Usuário (papel), Grupo (ID_Administrador).
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-001, RF-002, RF-005
@@ -190,7 +190,7 @@ Transação (Comprovante).
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-004
