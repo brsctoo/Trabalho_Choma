@@ -6,7 +6,7 @@
 Segurança
 
 **Descrição:**
-O sistema deve proteger os dados bancários e a chave Pix dos usuários por meio de criptografia em repouso e em trânsito.
+O sistema deve proteger os dados bancários e a chave Pix dos usuários por meio de criptografia.
 
 **Justificativa:**
 Dados financeiros/bancários são sensíveis e exigem proteção contra acesso não autorizado.
@@ -21,7 +21,7 @@ Todo o sistema, em especial os dados de Usuário e Transação.
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-001, RF-004, RF-005
@@ -31,13 +31,13 @@ CT-006
 
 ---
 
-## RNF-002 — Desempenho no Cálculo de Rateio
+## RNF-002 — Desempenho no Cálculo de Divisão
 
 **Categoria:**
 Desempenho
 
 **Descrição:**
-O sistema deve recalcular e apresentar o valor individual do rateio em até 2 segundos após qualquer alteração no grupo.
+O sistema deve recalcular e apresentar o valor individual da divisão em poucos segundos após qualquer alteração no grupo.
 
 **Justificativa:**
 Garantir uma experiência fluida para o usuário ao consultar sua cota.
@@ -52,7 +52,7 @@ Funcionalidade de Divisão de Custos (RF-003).
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-003
@@ -71,7 +71,7 @@ Disponibilidade
 O sistema deve estar disponível para acesso dos usuários em, no mínimo, 99% do tempo mensal.
 
 **Justificativa:**
-Membros precisam acessar o sistema para registrar pagamentos dentro do prazo de vencimento, evitando prejuízo à continuidade do serviço compartilhado.
+Membros precisam acessar o sistema para registrar pagamentos dentro do prazo de vencimento, evitando prejuízo à comunidade do serviço compartilhado.
 
 **Métrica/Critério mensurável:**
 Uptime mensal maior ou igual a 99%, monitorado por ferramenta de observabilidade.
@@ -83,7 +83,7 @@ Todo o sistema.
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-004, RF-005
@@ -99,13 +99,13 @@ CT-008
 Usabilidade
 
 **Descrição:**
-O processo de convite e ingresso de um novo membro no grupo deve ser concluído em no máximo 3 passos, sem necessidade de treinamento prévio.
+O processo de convite e ingresso de um novo membro no grupo deve ser concluído em no máximo 3 passos.
 
 **Justificativa:**
 Facilitar a adesão de novos membros e reduzir a taxa de abandono no ingresso ao grupo.
 
 **Métrica/Critério mensurável:**
-Testes de usabilidade indicando conclusão do fluxo em até 3 passos por, no mínimo, 90% dos usuários testados.
+Testes de usabilidade indicando conclusão do fluxo em até 3 passos.
 
 **Escopo:**
 Funcionalidade de Convite de Membros (RF-002).
@@ -114,7 +114,7 @@ Funcionalidade de Convite de Membros (RF-002).
 Média
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-002
@@ -145,7 +145,7 @@ Funcionalidades de Pagamento e Validação (RF-004, RF-005).
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Requisitos relacionados:**
 RF-004, RF-005
