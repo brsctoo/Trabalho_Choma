@@ -8,11 +8,11 @@
 
 - **Usuário** — conta, identificação, contato, dados de pagamento e reputação.
 - **Serviço/Plano** — nome do serviço, plano, periodicidade, limite de membros e regras de compatibilidade.
-- **Grupo** — administrador, plano associado, status, vagas, valor total e configurações do rateio.
+- **Grupo** — administrador, plano associado, status, vagas, valor total e configurações da divisão.
 - **Participação** — relação entre usuário e grupo, cota, estado, datas de entrada/saída e confirmação de acesso.
 - **Transação** — membro, grupo, valor, vencimento, data de pagamento, comprovante e status.
-- **Incidente** — tipo do problema, participante, grupo, descrição, estado, ações tomadas e resolução.
-- **Avaliação/Reputação** — nota, histórico de ocorrências e indicadores de saúde do grupo/administrador.
+- **Incidente** — tipo do problema, participante, grupo, descrição, estado, histórico, ações tomadas e resolução.
+- **Avaliação/Reputação** — nota, histórico de ocorrências e indicadores avaliativos do grupo/administrador.
 
 ## Relações (em linguagem natural)
 
