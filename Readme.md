@@ -1,7 +1,6 @@
 # Share+
 
 ## Descrição do Projeto
-### Share+
 Plataforma voltada à organização e ao compartilhamento de assinaturas digitais entre titulares e participantes. O sistema reúne, em um único ambiente, a criação de grupos, o preenchimento de vagas, a divisão de custos, o acompanhamento de pagamentos e a gestão do acesso ao serviço.
 
 A proposta é reduzir a dependência de conversas informais, planilhas e cobranças manuais, oferecendo mais previsibilidade para quem administra uma assinatura e mais segurança para quem participa de um grupo. Em uma evolução do produto, o Share+ também pode atuar como marketplace, conectando usuários a vagas compatíveis de forma automatizada.
