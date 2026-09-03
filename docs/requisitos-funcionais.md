@@ -6,7 +6,7 @@
 Cadastro de assinatura compartilhada.
 
 **Descrição:**
-O sistema deve permitir que o Administrador cadastre uma nova assinatura informando nome do serviço, valor mensal, periodicidade, dia de vencimento e número de vagas disponíveis.
+O sistema deve permitir que o Administrador cadastre uma nova assinatura informando nome do serviço, valor, periodicidade, dia de vencimento e número de vagas disponíveis.
 
 **Objetivo:**
 Criar o grupo e viabilizar o compartilhamento de uma assinatura entre membros.
@@ -43,7 +43,7 @@ RN-004
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Não permitir cadastro sem nome do serviço, valor total e dia de vencimento.
@@ -85,7 +85,7 @@ Grupo cadastrado; vagas disponíveis maiores que zero (RN-001).
 E-mail do convidado (opcional) ou solicitação de geração de link.
 
 **Processamento esperado:**
-O sistema deve validar a disponibilidade de vagas (RN-001) e gerar um link/código único de convite ou disparar um e-mail de convite.
+O sistema deve validar a disponibilidade de vagas (RN-001) e gerar um link único de convite ou disparar um e-mail de convite.
 
 **Saídas/Resultados:**
 Link de convite gerado ou e-mail de convite enviado.
@@ -104,7 +104,7 @@ RN-001, RN-004
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Não gerar convite quando não houver vagas disponíveis.
@@ -122,7 +122,7 @@ CT-002
 
 ---
 
-## RF-003 — Calcular Rateio
+## RF-003 — Calcular Divisão
 
 **Título:**
 Cálculo automático do valor individual.
@@ -155,8 +155,8 @@ Valor individual atualizado, exibido para cada membro do grupo.
 Os valores individuais refletem a composição atual do grupo.
 
 **Fluxos alternativos/exceções:**
-- Grupo sem membros ativos (impedir divisão por zero).
-
+- Grupo sem membros ativos.
+  
 **Regras de negócio relacionadas:**
 RN-002
 
@@ -164,7 +164,7 @@ RN-002
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Recalcular automaticamente o valor individual ao entrar ou sair um membro.
@@ -203,7 +203,7 @@ Membro do Grupo.
 Membro vinculado a um grupo ativo com cota individual definida.
 
 **Entradas:**
-Comprovante de pagamento (arquivo/URL), valor pago, data do pagamento.
+Comprovante de pagamento (arquivo), valor pago, data do pagamento.
 
 **Processamento esperado:**
 O sistema deve registrar uma nova Transação com status "Pendente de validação", associada ao membro (RN-005).
@@ -285,7 +285,7 @@ RN-003, RN-004
 Crítica
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Apenas o Administrador do grupo pode validar transações do grupo.
