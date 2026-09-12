@@ -109,7 +109,6 @@ Aprovado
 **Critérios de aceite:**
 - Não gerar convite quando não houver vagas disponíveis.
 - Link de convite deve ser único por grupo.
-- Ao aceitar o convite, o membro é automaticamente vinculado ao grupo.
 
 **Casos de uso relacionados:**
 UC-002
@@ -122,7 +121,68 @@ CT-002
 
 ---
 
-## RF-003 — Calcular Divisão
+## RF-003 — Confirmar Entrada no Grupo
+
+**Título:**
+Confirmar a entrada de um membro no grupo.
+
+**Descrição:**
+O sistema deve permitir que o Membro, ao acessar o link ou encontrar um grupo para entrar, possa visualizar as condições e avaliações do grupo e confirme sua entrada, sendo então vinculado ao grupo. 
+
+**Objetivo:**
+Permitir que o futuro membro avalie as condições e avaliações do grupo antes de decidir se vai participar ou não do grupo em questão.
+
+**Stakeholders:**
+Administrador do Grupo, Membro do Grupo.
+
+**Ator principal:**
+Membro do Grupo (Convidado).
+
+**Pré-condições:**
+Convite válido e não expirado; vaga disponível no grupo.
+
+**Entradas:**
+Link de convite; confirmação de entrada do Membro.
+
+**Processamento esperado:**
+O sistema deve apresentar as condições e avaliações do grupo e, após a confirmação de entrada do Membro, criar o vínculo do novo membro com o grupo em questão.
+
+**Saídas/Resultados:**
+Participação do novo membro no grupo; vaga ocupada no grupo.
+
+**Pós-condições:**
+Membro vinculado ao grupo; vagas disponíveis decrementadas.
+
+**Fluxos alternativos/exceções:**
+- Convite expirado.
+- Vaga já preenchida por outro usuário.
+
+**Regras de negócio relacionadas:**
+RN-001
+
+**Prioridade:**
+Alta
+
+**Status:**
+Aprovado
+
+**Critérios de aceite:**
+- Não permitir confirmação se a vaga já foi preenchida.
+- Não permitir confirmação se o convite já tiver expirado.
+- Se o membro aceitar participar, decrementar as vagas disponíveis;
+
+**Casos de uso relacionados:**
+UC-003
+
+**Tarefas relacionadas:**
+TASK-003
+
+**Casos de teste relacionados:**
+CT-003
+
+---
+
+## RF-004 — Calcular Divisão
 
 **Título:**
 Cálculo automático do valor individual.
@@ -172,17 +232,17 @@ Aprovado
 - Impedir divisão por zero quando não houver membros ativos.
 
 **Casos de uso relacionados:**
-UC-003
+UC-004
 
 **Tarefas relacionadas:**
-TASK-003
+TASK-004
 
 **Casos de teste relacionados:**
-CT-003
+CT-004
 
 ---
 
-## RF-004 — Registrar Pagamento
+## RF-005 — Registrar Pagamento
 
 **Título:**
 Registro de pagamento pelo membro.
@@ -232,17 +292,17 @@ Proposto
 - Registrar data e valor informados pelo membro.
 
 **Casos de uso relacionados:**
-UC-004
+UC-005
 
 **Tarefas relacionadas:**
-TASK-004
+TASK-005
 
 **Casos de teste relacionados:**
-CT-004
+CT-005
 
 ---
 
-## RF-005 — Validar Pagamento
+## RF-006 — Validar Pagamento
 
 **Título:**
 Validação de pagamento pelo administrador.
@@ -293,10 +353,130 @@ Aprovado
 - Registrar histórico da validação (quem validou e quando).
 
 **Casos de uso relacionados:**
-UC-005
+UC-006
 
 **Tarefas relacionadas:**
-TASK-005
+TASK-006
 
 **Casos de teste relacionados:**
-CT-005
+CT-006
+
+---
+
+## RF-007 — Confirmar Acesso
+
+**Título:**
+Confirmação de acesso do membro no grupo.
+
+**Descrição:**
+O sistema deve permitir que o Membro confirme que conseguiu acessar o grupo após o pagamento validado, atualizando seu estado de participação para "ativo".
+
+**Objetivo:**
+Formalizar o acesso ao serviço pelo Membro e que o acesso foi realmente disponibilizado após validamento.
+
+**Stakeholders:**
+Administrador do Grupo, Membro do Grupo.
+
+**Ator principal:**
+Membro do Grupo.
+
+**Pré-condições:**
+Membro com status "em dia" (RF-006).
+
+**Entradas:**
+Confirmação do Membro de que conseguiu acessar e utilizar o serviço.
+
+**Processamento esperado:**
+O sistema deve registrar a confirmação e atualizar o status da participação do Membro para "ativo".
+
+**Saídas/Resultados:**
+Estado da Participação atualizado para "ativo".
+
+**Pós-condições:**
+Participação do Membro está com status "ativo".
+
+**Fluxos alternativos/exceções:**
+- Falha de acesso (RF-008).
+
+**Regras de negócio relacionadas:**
+Nenhuma regra vinculada.
+
+**Prioridade:**
+Média
+
+**Status:**
+Proposto
+
+**Critérios de aceite:**
+- Deve ser possível ao Membro confirmar que conseguiu acessar e utilizar o serviço.
+- Ao confirmar a participação, o estado do membro deve atualizar para "ativo".
+- Em caso de falha, o sistema deve permitir abrir um incidente.
+
+**Casos de uso relacionados:**
+UC-007
+
+**Tarefas relacionadas:**
+TASK-007
+
+**Casos de teste relacionados:**
+CT-007
+
+---
+
+## RF-008 — Registrar Incidente
+
+**Título:**
+Registro de incidente no grupo.
+
+**Descrição:**
+O sistema deve permitir que o Administrador ou o Membro registrem um incidente relacionado a saúde ou sistema do grupo, com um histórico de ações tomadas até a resolução do incidente.
+
+**Objetivo:**
+Formaliar e acompanhar incidentes ocorridos no grupo, garantindo uma segurança das informações até a resolução.
+
+**Stakeholders:**
+Administrador do Grupo, Membro do Grupo.
+
+**Ator principal:**
+Administrador do Grupo ou Membro do Grupo.
+
+**Pré-condições:**
+O usuário que registrar o incidente deve estar vinculado ao grupo (Membro ou Administrador).
+
+**Entradas:**
+Tipo do problema, descrição do incidente, grupo que ocorreu e os usuários envolvidos.
+
+**Processamento esperado:**
+O sistema deve validar os dados informados e criar o registro do incidente com eles, com estado inicial "aberto" e com o histórico de tudo que ocorrer até a resolução do problema. Ao ser solucionado, o problema tem o estado atualizado para "fechado".
+
+**Saídas/Resultados:**
+Incidente registrado, disponível para acompanhar a atualiazação dos fatos e do estado do problema.
+
+**Pós-condições:**
+Incidente estar vinculado ao grupo, com histórico das ações e estado.
+
+**Fluxos alternativos/exceções:**
+- Tipo de problema não informado ou dados inválidos.
+
+**Regras de negócio relacionadas:**
+Nenhuma regra vinculada.
+
+**Prioridade:**
+Média
+
+**Status:**
+Proposto
+
+**Critérios de aceite:**
+- Não permitir registro de incidente sem tipo do problema e descrição, ou com dados inválidos.
+- Incidente deve ser criado com estado "aberto" por padrão, até a sua resolução, quando o status é atualizado para "fechado".
+- Deve ser possível registrar e consultar o histórico de ações até a resolução.
+
+**Casos de uso relacionados:**
+UC-008
+
+**Tarefas relacionadas:**
+TASK-008
+
+**Casos de teste relacionados:**
+CT-008
