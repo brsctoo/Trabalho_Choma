@@ -158,7 +158,7 @@ Membro vinculado ao grupo; vagas disponíveis decrementadas.
 - Vaga já preenchida por outro usuário.
 
 **Regras de negócio relacionadas:**
-RN-001
+RN-001, RN-006
 
 **Prioridade:**
 Alta
@@ -284,7 +284,7 @@ RN-005
 Alta
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Não permitir registro de pagamento sem comprovante anexado.
@@ -399,13 +399,13 @@ Participação do Membro está com status "ativo".
 - Falha de acesso (RF-008).
 
 **Regras de negócio relacionadas:**
-Nenhuma regra vinculada.
+RN-007
 
 **Prioridade:**
 Média
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Deve ser possível ao Membro confirmar que conseguiu acessar e utilizar o serviço.
@@ -459,13 +459,13 @@ Incidente estar vinculado ao grupo, com histórico das ações e estado.
 - Tipo de problema não informado ou dados inválidos.
 
 **Regras de negócio relacionadas:**
-Nenhuma regra vinculada.
+RN-008
 
 **Prioridade:**
 Média
 
 **Status:**
-Proposto
+Aprovado
 
 **Critérios de aceite:**
 - Não permitir registro de incidente sem tipo do problema e descrição, ou com dados inválidos.
