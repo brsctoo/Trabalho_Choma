@@ -33,7 +33,7 @@ Alta
 Aprovado
 
 **Requisitos relacionados:**
-RF-002
+RF-002, RF-003
 
 **Observações:**
 O número de vagas é definido pelo Administrador no momento do cadastro da assinatura.
@@ -73,10 +73,10 @@ Crítica
 Aprovado
 
 **Requisitos relacionados:**
-RF-003
+RF-004
 
 **Observações:**
-Caso o grupo fique sem membros ativos, a divisão fica indefinida — ver RF-003 (critérios de aceite).
+Caso o grupo fique sem membros ativos, a divisão fica indefinida.
 
 ---
 
@@ -113,7 +113,7 @@ Crítica
 Aprovado
 
 **Requisitos relacionados:**
-RF-005
+RF-006
 
 **Observações:**
 —
@@ -153,7 +153,7 @@ Alta
 Aprovado
 
 **Requisitos relacionados:**
-RF-001, RF-002, RF-005
+RF-001, RF-002, RF-006
 
 **Observações:**
 —
@@ -193,7 +193,127 @@ Alta
 Aprovado
 
 **Requisitos relacionados:**
-RF-004
+RF-005
+
+**Observações:**
+—
+
+---
+
+## RN-006 — Validade do Convite
+
+**Título:**
+Prazo de expiração do convite de ingresso
+
+**Descrição:**
+Um convite gerado é válido por um prazo determinado. Após passar esse prazo, ele expira e não pode mais ser utilizado por nenhum usuário.
+
+**Origem:**
+Mapa de Fluxos — Entrar no Grupo.
+
+**Stakeholders envolvidos:**
+Administrador do Grupo, Membro do Grupo.
+
+**Condição:**
+Aplicada sempre que um membro tentar acessar um grupo por meio de um convite.
+
+**Regra:**
+Um convite só pode ser utilizado se estiver dentro do prazo de validade dele.
+
+**Exceções:**
+Nenhuma identificada.
+
+**Dados envolvidos:**
+Convite (Data de criação e prazo de validade).
+
+**Prioridade:**
+Média
+
+**Status:**
+Aprovado
+
+**Requisitos relacionados:**
+RF-002, RF-003
+
+**Observações:**
+—
+
+---
+
+## RN-007 — Confirmação Explícita de Acesso
+
+**Título:**
+Ativação da participação de um membro via confirmação
+
+**Descrição:**
+O estado da Participação de um Membro só é alterado para "ativo" mediante confirmação do próprio Membro, informando que conseguiu acessar e utilizar o serviço.
+
+**Origem:**
+Mapa de Fluxos — Confirmar Acesso.
+
+**Stakeholders envolvidos:**
+Membro do Grupo, Administrador do Grupo.
+
+**Condição:**
+Aplicada após a validação do pagamento do Membro (status "em dia").
+
+**Regra:**
+O estado da Participação de um Membro só é atualizada via confirmação do próprio membro.
+
+**Exceções:**
+Nenhuma identificada.
+
+**Dados envolvidos:**
+Participação (estado).
+
+**Prioridade:**
+Média
+
+**Status:**
+Aprovado
+
+**Requisitos relacionados:**
+RF-007
+
+**Observações:**
+—
+
+---
+
+## RN-008 — Fechamento de Incidente
+
+**Título:**
+Condição para encerramento de um incidente.
+
+**Descrição:**
+Um incidente só pode ter seu estado alterado para "fechado" após o registro de ao menos uma ação de resolução.
+
+**Origem:**
+Mapa de Fluxos — Registrar Incidente
+
+**Stakeholders envolvidos:**
+Administrador do Grupo, Membro do Grupo.
+
+**Condição:**
+Aplicada ao tentar encerrar um problema.
+
+**Regra:**
+O sistema não permite fechar um incidente sem que ao menos uma ação de resolução tenha sido registrada.
+
+**Exceções:**
+Nenhuma identificada.
+
+**Dados envolvidos:**
+Incidente (estado, histórico de ações).
+
+**Prioridade:**
+Baixa
+
+**Status:**
+Aprovado
+
+**Requisitos relacionados:**
+RF-008
 
 **Observações:**
 —
