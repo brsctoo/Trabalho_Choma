@@ -26,14 +26,17 @@ Administrador decide cadastrar uma nova assinatura compartilhada.
 3. Sistema cria o registro da nova assinatura.
 4. Sistema cria o Grupo associado, com apenas o Administrador como membro, com status "Ativo" e Administrador vinculado automaticamente.
 5. Sistema confirma o cadastro e disponibiliza o grupo para receber convites e permite o Administrado compartilhar convites do grupo.
+
 **Fluxos alternativos:**
 —
  
 **Fluxos de exceção:**
-FE01 — Dados obrigatórios ausentes
+
+**FE01 — Dados obrigatórios ausentes**
 1. Sistema identifica campo obrigatório não preenchido (nome do serviço, valor total ou dia de vencimento).
 2. Sistema informa o erro e não cria a assinatura.
-FE02 — Valor total inválido
+
+**FE02 — Valor total inválido**
 1. Sistema identifica valor total menor ou igual à 0.
 2. Sistema informa o erro e não cria a assinatura.
 
@@ -70,14 +73,17 @@ Administrador decide convidar usuários para o grupo.
 2. Sistema valida a disponibilidade de vagas (RN-001).
 3. Sistema gera um link único de convite (com tempo até expirar) ou manda um e-mail com um convite para o usuário selecionado.
 4. Sistema disponibiliza o convite ao Administrador (caso tenha selecionado para gerar um link).
+
 **Fluxos alternativos:**
 —
  
 **Fluxos de exceção:**
-FE01 — Grupo sem vagas disponíveis
+
+**FE01 — Grupo sem vagas disponíveis**
 1. Sistema identifica que não há vagas disponíveis (RN-001).
 2. Sistema impede a geração do convite e informa o erro.
-FE02 — E-mail informado em formato inválido
+
+**FE02 — E-mail informado em formato inválido**
 1. Sistema identifica formato de e-mail inválido.
 2. Sistema informa o erro e solicita a correção.
 
@@ -121,10 +127,12 @@ Membro acessa o link de convite ou encontra uma vaga disponível em um grupo de 
 —
  
 **Fluxos de exceção:**
-FE01 — Convite expirado
+
+**FE01 — Convite expirado**
 1. Sistema identifica que o convite expirou.
 2. Sistema impede a confirmação e informa o erro.
-FE02 — Vaga já preenchida
+
+**FE02 — Vaga já preenchida**
 1. Sistema identifica que a vaga já foi ocupada por outro usuário.
 2. Sistema impede a confirmação e informa o erro.
 
@@ -166,7 +174,8 @@ Criação do grupo, alteração no número de membros ativos ou no valor total d
 —
  
 **Fluxos de exceção:**
-FE01 — Grupo sem membros ativos
+
+**FE01 — Grupo sem membros ativos**
 1. Sistema identifica a ausência de membros ativos.
 2. Sistema impede o cálculo e mantém a divisão indefinida.
 
@@ -209,7 +218,8 @@ Membro decide pagar sua parte do valor da assniatura referente ao um período.
 —
  
 **Fluxos de exceção:**
-FE01 — Comprovante não anexado
+
+**FE01 — Comprovante não anexado**
 1. Sistema identifica a ausência de comprovante.
 2. Sistema impede o registro e solicita o anexo (RN-005).
 
@@ -249,7 +259,8 @@ Administrador é notificado de uma transação pendente ou acessa a lista de pen
 5. Sistema registra o histórico da validação (quem validou e quando).
 
 **Fluxos alternativos:**
-FA01 — Rejeitar pagamento
+
+**FA01 — Rejeitar pagamento**
 1. Administrador rejeita o pagamento.
 2. Sistema atualiza o status da transação para "rejeitado" e o status do membro para "pendente".
 3. Sistema registra o histórico da rejeição.
@@ -335,9 +346,10 @@ Ocorrência de um problema no ambiente do grupo ou no sistema.
 
 **Fluxos alternativos:**
 —
- 
+
 **Fluxos de exceção:**
-FE01 — Dados inválidos ou tipo de problema não informado
+
+**FE01 — Dados inválidos ou tipo de problema não informado**
 1. Sistema identifica a ausência do tipo de problema ou dados inválidos.
 2. Sistema impede o registro e solicita a correção.
 
