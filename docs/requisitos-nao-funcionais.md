@@ -26,9 +26,6 @@ Aprovado
 **Requisitos relacionados:**
 RF-001, RF-004, RF-005
 
-**Casos de teste relacionados:**
-CT-006
-
 ---
 
 ## RNF-002 — Desempenho no Cálculo de Divisão
@@ -56,9 +53,6 @@ Aprovado
 
 **Requisitos relacionados:**
 RF-003
-
-**Casos de teste relacionados:**
-CT-007
 
 ---
 
@@ -88,9 +82,6 @@ Aprovado
 **Requisitos relacionados:**
 RF-004, RF-005
 
-**Casos de teste relacionados:**
-CT-008
-
 ---
 
 ## RNF-004 — Usabilidade do Fluxo de Convite
@@ -119,9 +110,6 @@ Aprovado
 **Requisitos relacionados:**
 RF-002
 
-**Casos de teste relacionados:**
-CT-009
-
 ---
 
 ## RNF-005 — Confiabilidade no Registro de Transações
@@ -149,6 +137,3 @@ Aprovado
 
 **Requisitos relacionados:**
 RF-004, RF-005
-
-**Casos de teste relacionados:**
-CT-010

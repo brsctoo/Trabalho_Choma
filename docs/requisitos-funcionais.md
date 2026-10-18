@@ -53,12 +53,6 @@ Aprovado
 **Casos de uso relacionados:**
 UC-001
 
-**Tarefas relacionadas:**
-TASK-001
-
-**Casos de teste relacionados:**
-CT-001
-
 ---
 
 ## RF-002 — Convidar Membros
@@ -112,12 +106,6 @@ Aprovado
 
 **Casos de uso relacionados:**
 UC-002
-
-**Tarefas relacionadas:**
-TASK-002
-
-**Casos de teste relacionados:**
-CT-002
 
 ---
 
@@ -174,12 +162,6 @@ Aprovado
 **Casos de uso relacionados:**
 UC-003
 
-**Tarefas relacionadas:**
-TASK-003
-
-**Casos de teste relacionados:**
-CT-003
-
 ---
 
 ## RF-004 — Calcular Divisão
@@ -234,12 +216,6 @@ Aprovado
 **Casos de uso relacionados:**
 UC-004
 
-**Tarefas relacionadas:**
-TASK-004
-
-**Casos de teste relacionados:**
-CT-004
-
 ---
 
 ## RF-005 — Registrar Pagamento
@@ -293,12 +269,6 @@ Aprovado
 
 **Casos de uso relacionados:**
 UC-005
-
-**Tarefas relacionadas:**
-TASK-005
-
-**Casos de teste relacionados:**
-CT-005
 
 ---
 
@@ -355,12 +325,6 @@ Aprovado
 **Casos de uso relacionados:**
 UC-006
 
-**Tarefas relacionadas:**
-TASK-006
-
-**Casos de teste relacionados:**
-CT-006
-
 ---
 
 ## RF-007 — Confirmar Acesso
@@ -415,12 +379,6 @@ Aprovado
 **Casos de uso relacionados:**
 UC-007
 
-**Tarefas relacionadas:**
-TASK-007
-
-**Casos de teste relacionados:**
-CT-007
-
 ---
 
 ## RF-008 — Registrar Incidente
@@ -474,9 +432,3 @@ Aprovado
 
 **Casos de uso relacionados:**
 UC-008
-
-**Tarefas relacionadas:**
-TASK-008
-
-**Casos de teste relacionados:**
-CT-008
