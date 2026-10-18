@@ -1,0 +1,106 @@
+@startuml
+title UC-002: Convidar Membros
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor Administrador as Admin
+boundary "Tela de Convite" as Tela
+participant "ConviteController" as Controller <<controller>>
+participant "ConviteService" as Service <<service>>
+participant "GrupoRepository" as Grupos <<repository>>
+participant "ConviteRepository" as Convites <<repository>>
+participant "Serviço de E-mail" as Email
+
+note over Admin, Tela
+    Pré-condições:
+    grupo cadastrado;
+    vagas disponíveis maiores que zero (RN-001)
+end note
+
+Admin -> Tela: Gerar link ou e-mail
+activate Tela
+
+Tela -> Controller: convidar(grupoId, tipo, email)
+activate Controller
+
+Controller -> Service: convidar(grupoId, tipo, email)
+activate Service
+
+Service -> Grupos: buscarGrupo(grupoId)
+activate Grupos
+Grupos --> Service: grupo e vagas disponíveis
+deactivate Grupos
+
+Service -> Service: verificarVagas()
+
+alt Grupo sem vagas
+
+    Service --> Controller: semVagas
+    Controller --> Tela: semVagas
+    Tela --> Admin: Informar que o grupo está cheio
+
+else Grupo com vagas
+
+    alt Convite por e-mail
+
+        Service -> Service: validarEmail(email)
+
+        alt E-mail inválido
+
+            Service --> Controller: emailInvalido
+            Controller --> Tela: emailInvalido
+            Tela --> Admin: Pedir correção do e-mail
+
+        else E-mail válido
+
+            Service -> Service: gerarConvite(grupoId, email)
+            Service -> Service: definirValidade()
+
+            Service -> Convites: salvar(convite)
+            activate Convites
+            Convites --> Service: convite salvo
+            deactivate Convites
+
+            Service -> Email: enviarConvite(email, convite)
+            activate Email
+            Email --> Service: convite enviado
+            deactivate Email
+
+            Service --> Controller: conviteEnviado
+            Controller --> Tela: conviteEnviado
+            Tela --> Admin: Confirmar envio do convite
+
+        end
+
+    else Convite por link
+
+        Service -> Service: gerarLink(grupoId)
+        Service -> Service: definirValidade()
+
+        Service -> Convites: salvar(convite)
+        activate Convites
+        Convites --> Service: convite salvo
+        deactivate Convites
+
+        Service --> Controller: linkConvite
+        Controller --> Tela: linkConvite
+        Tela --> Admin: Exibir link para compartilhar
+
+    end
+
+end
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml

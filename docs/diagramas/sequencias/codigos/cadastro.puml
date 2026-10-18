@@ -1,0 +1,74 @@
+@startuml
+title UC-001: Cadastrar Assinatura
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor Administrador as Admin
+boundary "Tela de Assinatura" as Tela
+participant "AssinaturaController" as Controller <<controller>>
+participant "AssinaturaService" as Service <<service>>
+participant "AssinaturaRepository" as Assinaturas <<repository>>
+participant "GrupoRepository" as Grupos <<repository>>
+participant "DivisaoService" as Divisao <<service>>
+
+note over Admin, Tela
+    Pré-condição:
+    administrador autenticado
+end note
+
+Admin -> Tela: Informar dados da assinatura
+activate Tela
+
+Tela -> Controller: cadastrar(dados)
+activate Controller
+
+Controller -> Service: cadastrar(dados)
+activate Service
+
+Service -> Service: validarDados()
+
+alt Dados obrigatórios ausentes ou valor <= 0
+
+    Service --> Controller: erroValidacao
+    Controller --> Tela: erroValidacao
+    Tela --> Admin: Exibir dados inválidos
+
+else Dados válidos
+
+    Service -> Assinaturas: salvar(assinatura)
+    activate Assinaturas
+    Assinaturas --> Service: assinaturaId
+    deactivate Assinaturas
+
+    Service -> Service: montarGrupo(administrador)
+
+    Service -> Grupos: salvar(grupo, administrador)
+    activate Grupos
+    Grupos --> Service: grupoId
+    deactivate Grupos
+
+    Service -> Divisao: calcular(grupoId)
+    activate Divisao
+    Divisao --> Service: resultado da divisão
+    deactivate Divisao
+
+    Service --> Controller: cadastroRealizado
+    Controller --> Tela: cadastroRealizado
+    Tela --> Admin: Exibir confirmação do cadastro
+
+end
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml

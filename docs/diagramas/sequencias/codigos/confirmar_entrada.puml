@@ -1,0 +1,114 @@
+@startuml
+title UC-003: Confirmar Entrada no Grupo
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor "Membro Convidado" as Membro
+boundary "Tela do Grupo" as Tela
+participant "ParticipantesController" as Controller <<controller>>
+participant "ParticipantesService" as Service <<service>>
+participant "ConviteRepository" as Convites <<repository>>
+participant "GrupoRepository" as Grupos <<repository>>
+participant "ParticipantesRepository" as Participantes <<repository>>
+participant "DivisaoService" as Divisao <<service>>
+
+note over Membro, Tela
+    Pré-condições:
+    convite válido e não expirado;
+    vaga disponível no grupo
+end note
+
+Membro -> Tela: Acessar convite
+activate Tela
+
+Tela -> Controller: consultarGrupo(link)
+activate Controller
+
+Controller -> Service: consultarGrupo(link)
+activate Service
+
+Service -> Grupos: buscarGrupo(link)
+activate Grupos
+Grupos --> Service: dados do grupo
+deactivate Grupos
+
+Service --> Controller: dados do grupo
+deactivate Service
+Controller --> Tela: dados do grupo
+deactivate Controller
+Tela --> Membro: Exibir condições e saúde do grupo
+deactivate Tela
+
+Membro -> Tela: Confirmar entrada
+activate Tela
+
+Tela -> Controller: confirmarEntrada(link, membroId)
+activate Controller
+Controller -> Service: confirmarEntrada(link, membroId)
+activate Service
+
+Service -> Convites: buscarConvite(link)
+activate Convites
+Convites --> Service: convite com validade e grupoId
+deactivate Convites
+
+Service -> Grupos: buscarGrupo(grupoId)
+activate Grupos
+Grupos --> Service: grupo e vagas disponíveis
+deactivate Grupos
+
+Service -> Service: validarEntrada()
+
+alt Convite expirado
+
+    Service --> Controller: conviteExpirado
+    Controller --> Tela: conviteExpirado
+    Tela --> Membro: Informar convite expirado
+
+else Vaga já preenchida
+
+    Service --> Controller: semVagas
+    Controller --> Tela: semVagas
+    Tela --> Membro: Informar vaga preenchida
+
+else Convite válido e vaga disponível
+
+    Service -> Service: criarParticipacao(membroId, grupoId)
+
+    Service -> Participantes: salvar(participacao)
+    activate Participantes
+    Participantes --> Service: participação criada
+    deactivate Participantes
+
+    Service -> Service: decrementarVagas(grupo)
+
+    Service -> Grupos: salvar(grupo)
+    activate Grupos
+    Grupos --> Service: vagas atualizadas
+    deactivate Grupos
+
+    Service -> Divisao: calcular(grupoId)
+    activate Divisao
+    Divisao --> Service: resultado da divisão
+    deactivate Divisao
+
+    Service --> Controller: entradaConfirmada
+    Controller --> Tela: entradaConfirmada
+    Tela --> Membro: Exibir confirmação de entrada
+
+end
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml

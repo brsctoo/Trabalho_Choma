@@ -1,0 +1,63 @@
+@startuml
+title UC-004: Calcular Divisão
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+participant "ServiceSolicitante" as Service <<service>>
+participant "DivisaoService" as Divisao <<service>>
+participant "GrupoRepository" as Grupos <<repository>>
+participant "ParticipantesRepository" as Participantes <<repository>>
+
+note over Service, Divisao
+    Pré-condição:
+    grupo com pelo menos um membro ativo
+end note
+
+Service -> Divisao: calcular(grupoId)
+activate Service
+activate Divisao
+
+Divisao -> Grupos: buscarGrupo(grupoId)
+activate Grupos
+Grupos --> Divisao: valor total
+deactivate Grupos
+
+Divisao -> Participantes: buscarParticipantesAtivos(grupoId)
+activate Participantes
+Participantes --> Divisao: participantes ativos
+deactivate Participantes
+
+Divisao -> Divisao: contarParticipantesAtivos()
+
+alt Nenhum membro ativo
+
+    Divisao -> Divisao: divisaoIndefinida()
+    Divisao --> Service: divisão indefinida
+
+else Existe pelo menos um membro ativo
+
+    Divisao -> Divisao: calcularCota
+    Divisao -> Divisao: atribuirCotasAosParticipantes()
+
+    Divisao -> Participantes: salvarCotas(participacoes)
+    activate Participantes
+    Participantes --> Divisao: cotas atualizadas
+    deactivate Participantes
+
+    Divisao --> Service: valores atualizados
+
+end
+
+deactivate Divisao
+deactivate Service
+
+@enduml

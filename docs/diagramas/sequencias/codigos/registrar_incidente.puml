@@ -1,0 +1,64 @@
+@startuml
+title UC-008: Registrar Incidente
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor "Administrador ou Membro" as Usuario
+boundary "Tela de Incidente" as Tela
+participant "IncidenteController" as Controller <<controller>>
+participant "IncidenteService" as Service <<service>>
+participant "IncidenteRepository" as Incidentes <<repository>>
+
+note over Usuario, Tela
+    Pré-condições:
+    usuário autenticado;
+    vinculado ao grupo
+end note
+
+Usuario -> Tela: Informar tipo, descrição, grupo e envolvidos
+activate Tela
+
+Tela -> Controller: registrarIncidente(dados)
+activate Controller
+
+Controller -> Service: registrarIncidente(dados)
+activate Service
+
+Service -> Service: validarDados()
+
+alt Dados inválidos ou tipo não informado
+
+    Service --> Controller: dadosInvalidos
+    Controller --> Tela: dadosInvalidos
+    Tela --> Usuario: Solicitar correção dos dados
+
+else Dados válidos
+
+    Service -> Service: criarIncidente(dados)
+    Service -> Service: definirEstado("aberto")
+
+    Service -> Incidentes: salvar(incidente)
+    activate Incidentes
+    Incidentes --> Service: incidente registrado
+    deactivate Incidentes
+
+    Service --> Controller: incidenteRegistrado
+    Controller --> Tela: incidenteRegistrado
+    Tela --> Usuario: Exibir confirmação do registro
+
+end
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml

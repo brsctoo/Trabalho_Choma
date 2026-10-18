@@ -1,0 +1,88 @@
+@startuml
+title UC-005: Registrar Pagamento
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor Membro
+boundary "Tela de Pagamento" as Tela
+participant "PagamentoController" as Controller <<controller>>
+participant "PagamentoService" as Service <<service>>
+participant "ParticipantesRepository" as Participantes <<repository>>
+participant "TransacaoRepository" as Transacoes <<repository>>
+
+note over Membro, Tela
+    Pré-condições:
+    membro vinculado a um grupo ativo;
+    valor individual definido
+end note
+
+Membro -> Tela: Acessar cobrança
+activate Tela
+
+Tela -> Controller: consultarCota(membroId, grupoId)
+activate Controller
+
+Controller -> Service: consultarCota(membroId, grupoId)
+activate Service
+
+Service -> Participantes: buscarCota(membroId, grupoId)
+activate Participantes
+Participantes --> Service: valor
+deactivate Participantes
+
+Service --> Controller: dados da cobrança
+deactivate Service
+
+Controller --> Tela: dados da cobrança
+deactivate Controller
+
+Tela --> Membro: Exibir cobrança
+deactivate Tela
+
+Membro -> Tela: Informar valor e anexar comprovante
+activate Tela
+
+Tela -> Controller: registrarPagamento(dados)
+activate Controller
+
+Controller -> Service: registrarPagamento(dados)
+activate Service
+
+Service -> Service: verificarComprovante()
+
+alt Comprovante não anexado
+
+    Service --> Controller: comprovanteObrigatorio
+    Controller --> Tela: comprovanteObrigatorio
+    Tela --> Membro: Solicitar anexo do comprovante
+
+else Comprovante anexado
+
+    Service -> Service: criarTransacao(dados)
+    Service -> Service: definirStatus("Pendente de validação")
+
+    Service -> Transacoes: salvar(transacao)
+    activate Transacoes
+    Transacoes --> Service: transação registrada
+    deactivate Transacoes
+
+    Service --> Controller: pagamentoRegistrado
+    Controller --> Tela: pagamentoRegistrado
+    Tela --> Membro: Informar que aguarda validação
+
+end
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml

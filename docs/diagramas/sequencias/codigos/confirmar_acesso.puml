@@ -1,0 +1,56 @@
+@startuml
+title UC-007: Confirmar Acesso
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor Membro
+boundary "Tela de Acesso" as Tela
+participant "AcessoController" as Controller <<controller>>
+participant "AcessoService" as Service <<service>>
+participant "ParticipantesRepository" as Participantes <<repository>>
+
+note over Membro, Tela
+    Pré-condição:
+    membro com status "em dia"
+end note
+
+Membro -> Tela: Confirmar que conseguiu acessar
+activate Tela
+
+Tela -> Controller: confirmarAcesso(membroId, grupoId)
+activate Controller
+
+Controller -> Service: confirmarAcesso(membroId, grupoId)
+activate Service
+
+Service -> Participantes: buscarParticipante(membroId, grupoId)
+activate Participantes
+Participantes --> Service: participação do membro
+deactivate Participantes
+
+Service -> Service: registrarConfirmacao()
+Service -> Service: atualizarEstado("ativo")
+
+Service -> Participantes: salvar(participacao)
+activate Participantes
+Participantes --> Service: participação atualizada
+deactivate Participantes
+
+Service --> Controller: acessoConfirmado
+Controller --> Tela: acessoConfirmado
+Tela --> Membro: Informar que a participação está ativa
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml

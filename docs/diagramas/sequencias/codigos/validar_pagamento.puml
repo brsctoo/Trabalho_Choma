@@ -1,0 +1,102 @@
+@startuml
+title UC-006: Validar Pagamento
+
+hide footbox
+autonumber
+
+skinparam sequence {
+    ParticipantBackgroundColor #FFDC69
+    ParticipantBorderColor #126B8F
+    LifeLineBorderColor #78909F
+    ArrowColor #183047
+    ActivationBackgroundColor #EAF4F8
+}
+
+actor Administrador as Admin
+boundary "Tela de Validação" as Tela
+participant "PagamentoController" as Controller <<controller>>
+participant "PagamentoService" as Service <<service>>
+participant "TransacaoRepository" as Transacoes <<repository>>
+participant "ParticipantesRepository" as Participantes <<repository>>
+
+note over Admin, Tela
+    Pré-condição:
+    transação com status
+    "Pendente de validação"
+end note
+
+Admin -> Tela: Acessar transação pendente
+activate Tela
+
+Tela -> Controller: consultarPagamento(transacaoId)
+activate Controller
+
+Controller -> Service: consultarPagamento(transacaoId)
+activate Service
+
+Service -> Transacoes: buscarTransacao(transacaoId)
+activate Transacoes
+Transacoes --> Service: transação e comprovante
+deactivate Transacoes
+
+Service --> Controller: dados do pagamento
+deactivate Service
+
+Controller --> Tela: dados do pagamento
+deactivate Controller
+
+Tela --> Admin: Exibir transação e comprovante
+deactivate Tela
+
+Admin -> Tela: Aprovar ou rejeitar pagamento
+activate Tela
+
+Tela -> Controller: validarPagamento(transacaoId, decisao)
+activate Controller
+
+Controller -> Service: validarPagamento(transacaoId, decisao)
+activate Service
+
+Service -> Transacoes: buscarTransacao(transacaoId)
+activate Transacoes
+Transacoes --> Service: transação
+deactivate Transacoes
+
+Service -> Participantes: buscarParticipante(membroId, grupoId)
+activate Participantes
+Participantes --> Service: participante
+deactivate Participantes
+
+alt Pagamento aprovado
+
+    Service -> Service: atualizarTransacao("em dia")
+    Service -> Service: atualizarMembro("em dia")
+
+else Pagamento rejeitado
+
+    Service -> Service: atualizarTransacao("rejeitado")
+    Service -> Service: atualizarMembro("pendente")
+
+end
+
+Service -> Service: registrarHistorico(decisao, administrador, data)
+
+Service -> Transacoes: salvar(transacao, historico)
+activate Transacoes
+Transacoes --> Service: transação e histórico atualizados
+deactivate Transacoes
+
+Service -> Participantes: salvar(participante)
+activate Participantes
+Participantes --> Service: situação financeira atualizada
+deactivate Participantes
+
+Service --> Controller: resultadoValidacao
+Controller --> Tela: resultadoValidacao
+Tela --> Admin: Exibir resultado da validação
+
+deactivate Service
+deactivate Controller
+deactivate Tela
+
+@enduml
